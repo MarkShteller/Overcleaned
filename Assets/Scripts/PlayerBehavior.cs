@@ -4,7 +4,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     private Tool tool;
 
-    public Tool getTool()
+    public Tool GetTool()
     {
         return tool;
     }
