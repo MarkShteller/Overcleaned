@@ -2,13 +2,16 @@
 
 public class RoomManager : MonoBehaviour
 {
-    public Tile[] tiles;
     public GameObject Floor;
+    public int TilesX;
+    public int TilesY;
+
+    private Tile[] _tiles;
 
     private void Start()
     {
-        BuildTileMap(Floor);
-        foreach (var tile in tiles)
+        BuildTileMap(Floor, TilesX, TilesY);
+        foreach (var tile in _tiles)
         {
             tile.IsClean = true;
         }
@@ -17,7 +20,7 @@ public class RoomManager : MonoBehaviour
     public float GetCleanlinessLevel()
     {
         float cleanLevel = 0;
-        foreach (var tile in tiles)
+        foreach (var tile in _tiles)
         {
             if (tile.IsClean) 
             {
@@ -125,13 +128,12 @@ public class RoomManager : MonoBehaviour
     }
     
     // SHOULD BE IN OWN CLASS ->>>
+    // MapBuilder.cs
 
-    private void BuildTileMap(GameObject floor)
+    private void BuildTileMap(GameObject floor, int x, int y)
     {
         Vector3 planeSize = this.GetFloorSize(floor);
-        Debug.Log(planeSize);
-
-        this.CreateTiles(10, planeSize);
+        this.CreateTiles(x, y, planeSize);
     }
 
     private Vector3 GetFloorSize(GameObject floor)
@@ -139,13 +141,32 @@ public class RoomManager : MonoBehaviour
         return floor.GetComponent<Renderer>().bounds.size;
     }
 
-    public void CreateTiles(int tileAmount, Vector3 planeSize)
+    private void CreateTiles(int cols, int rows, Vector3 planeSize)
     {
-        Vector3 edgeA = transform.position + new Vector3(planeSize.x * transform.localScale.x / 2, 0, 0);
-        Vector3 edgeB = transform.position - new Vector3(planeSize.x * transform.localScale.x / 2, 0, 0);
-        Vector3 edgeC = transform.position + new Vector3(0, 0, planeSize.z * transform.localScale.y / 2);
-        Vector3 edgeD = transform.position - new Vector3(0, 0, planeSize.z * transform.localScale.y / 2);
-        Debug.DrawLine(planeSize, planeSize, Color.blue);
+        int i = 0;
+
+        for (var x = 0; x < cols; x++)
+        {
+            for (var y = 0; y < rows; y++)
+            {
+                Tile t = new Tile(x, y);
+                _tiles[i] = t;
+                i++;
+            }
+        }
+    }
+
+    private void CalculatePhysicalLocation(Tile[] tiles, Vector3 planeSize)
+    {
+        float sizeX = planeSize.x;
+        float sizeY = planeSize.y;
+        float sizeZ = planeSize.z;
+
+        foreach (var tile in tiles)
+        {
+            tile.PhysicalX = tile.XLocation/planeSize.x;
+            tile.PhysicalY = tile.YLocation/planeSize.z;
+        }
     }
     
 }
