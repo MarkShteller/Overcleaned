@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
@@ -7,10 +10,31 @@ public class RoomManager : MonoBehaviour
     public float TileSize;
     public Transform TopLeft;
     public Transform BottomRight;
+
+    public List<GameObject> EasyMessPrefabs;
+    public List<GameObject> HardMessPrefabs;
+
+    //Game Difficulty tuning
+    public AnimationCurve DifficultyCurve;
+    public float MaxSpawnInterval;
+    public float MinSpawnInterval;
+    public float MinutesToMinInterval;
+    public float HardThreshold;
+
     
     private Vector3 XBasis = new Vector3(1,0,0);
     private Vector3 YBasis = new Vector3(0,0,-1);
     private Tile[,] _tiles;
+
+    //Game state variables
+    private float _startTime;
+
+    private void Awake()
+    {
+        if(instance == null){
+            instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -22,12 +46,31 @@ public class RoomManager : MonoBehaviour
         for (int i = 0; i < _tiles.GetLength(0); i++)
         {
             for (int j = 0; j < _tiles.GetLength(1); j++)
-            {   
-                
-                Debug.DrawLine(_tiles[i,j].TopLeft, _tiles[i,j].TopLeft + (XBasis * TileSize), Color.red);
-                Debug.DrawLine(_tiles[i,j].TopLeft, _tiles[i,j].TopLeft + (YBasis *TileSize), Color.red);
+            {
+                Tile t = _tiles[i, j];
+
+                Debug.DrawLine(t.TopLeft, t.TopLeft + (XBasis * TileSize), Color.red);
+                Debug.DrawLine(t.TopLeft, t.TopLeft + (YBasis * TileSize), Color.red);
+
+                if (t.HasPlayer)
+                {
+                    Vector3 center = t.GetCenter(TileSize);
+                    Debug.DrawRay(center, Vector3.up * 100.0f);
+                }
+
+                if (!t.IsClean)
+                {
+                    Vector3 center = t.GetCenter(TileSize);
+                    Debug.DrawRay(center, Vector3.up * 100.0f, Color.green);
+                }
             }
         }
+    }
+
+    public void StartGame()
+    {
+        this._startTime = Time.time;
+        StartCoroutine(MessSpawner());
     }
 
     public float GetCleanlinessLevel()
@@ -45,6 +88,81 @@ public class RoomManager : MonoBehaviour
         }
 
         return cleanLevel;
+    }
+
+
+    private IEnumerator MessSpawner()
+    {
+        while (true)
+        {
+
+            float timeElapsed = Time.time - this._startTime;
+            float timeScaled = timeElapsed / (MinutesToMinInterval * 60.0f);
+
+            TryToSpawnMess(timeScaled > HardThreshold);
+
+            float difficultyScale = DifficultyCurve.Evaluate(timeScaled);
+            float spawnInterval = MinSpawnInterval + (MaxSpawnInterval - MinSpawnInterval) * difficultyScale;
+
+            //Debug.Log("Spawn Interval:"+ spawnInterval);
+ 
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    // Might fail if no spare slot is found in time, returns false then
+    bool TryToSpawnMess(bool hard)
+    {
+        int MAX_SPAWN_ATTEMPTS = 5;
+
+        for(int spawnAttempt = 0; spawnAttempt < MAX_SPAWN_ATTEMPTS; spawnAttempt++)
+        {
+            int xIdx = UnityEngine.Random.Range(0, this._tiles.GetLength(0));
+            int yIdx = UnityEngine.Random.Range(0, this._tiles.GetLength(1));
+
+            Tile t = _tiles[xIdx, yIdx];
+            bool canSpawn = t.IsClean && !t.HasPlayer;
+
+            if (canSpawn)
+            {
+                List<GameObject> messPrefabs = new List<GameObject>(EasyMessPrefabs);
+
+                //weight mess based on difficulty level
+                if (hard)
+                {
+                    Debug.Log("SPAWNING HARD MESS");
+                    foreach( GameObject hardMess in HardMessPrefabs)
+                    {
+                        messPrefabs.Add(hardMess);
+                    }                  
+                }
+
+                GameObject prefab = messPrefabs[UnityEngine.Random.Range(0, messPrefabs.Count)];
+                
+                Vector3 jitterVector = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(-1.0f,1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f))) * TileSize * 0.3f;
+                Vector3 spawnPoint = t.GetCenter(TileSize) + jitterVector;
+
+                GameObject inst = GameObject.Instantiate(prefab, spawnPoint, Quaternion.identity);
+                Mess messInst = inst.GetComponent<Mess>();
+                //call mess lifecycle method
+                messInst.dropOn(t);
+
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+
+    public Tile GetTileAt(Vector3 position)
+    {
+        Vector3 offset = position - TopLeft.position;
+        int xIdx = Math.Max(Math.Min( (int) (Math.Abs(offset.x)/TileSize), _tiles.GetLength(0) - 1), 0);
+        int yIdx = Math.Max(Math.Min( (int) (Math.Abs(offset.z)/TileSize), _tiles.GetLength(1) - 1), 0);
+
+        return _tiles[xIdx, yIdx];
     }
 
     public void ChangeTileState(MessType state, PlayerBehavior playerBehavior)
@@ -82,7 +200,7 @@ public class RoomManager : MonoBehaviour
 
     public MessType GetTileMess(Tile tile)
     {
-        return tile.TileObjectReference.Messtype;
+        return tile.MessReference.Messtype;
     }
 
     private void HandleWetState(PlayerBehavior playerBehavior)

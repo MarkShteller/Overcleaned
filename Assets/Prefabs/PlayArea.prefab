@@ -129,6 +129,47 @@ MonoBehaviour:
   TileSize: 0.5
   TopLeft: {fileID: 8257485470615712029}
   BottomRight: {fileID: 8257485471199950073}
+  EasyMessPrefabs:
+  - {fileID: 3014566238391679181, guid: 89f70f095e5540a40a6c2395b8130a37, type: 3}
+  HardMessPrefabs:
+  - {fileID: 3014566238391679181, guid: d405d15d4b1adbf429fabc27af54b34e, type: 3}
+  DifficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.001449585
+      value: 1.0039062
+      inSlope: -0.325541
+      outSlope: -0.325541
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07129739
+    - serializedVersion: 3
+      time: 0.6171398
+      value: 0.6760948
+      inSlope: -1.2000291
+      outSlope: -1.2000291
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1556636
+    - serializedVersion: 3
+      time: 0.9956665
+      value: -0.00390625
+      inSlope: -0.037082806
+      outSlope: -0.037082806
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07039265
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxSpawnInterval: 5
+  MinSpawnInterval: 1
+  MinutesToMinInterval: 1
+  HardThreshold: 0.2
 --- !u!1 &8257485470839443648
 GameObject:
   m_ObjectHideFlags: 0

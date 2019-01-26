@@ -2864,26 +2864,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 385642457342420458, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642457528299380, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642457990869202, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642458193745754, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7cc93355d76dc84aa768ec4072c88fc, type: 3}
 --- !u!1 &1959596987
@@ -3020,6 +3000,33 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
+        type: 3}
+      propertyPath: EasyMessPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
+        type: 3}
+      propertyPath: HardMessPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
+        type: 3}
+      propertyPath: EasyMessPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3014566238391679181, guid: 89f70f095e5540a40a6c2395b8130a37,
+        type: 3}
+    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
+        type: 3}
+      propertyPath: HardMessPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3014566238391679181, guid: d405d15d4b1adbf429fabc27af54b34e,
+        type: 3}
+    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
+        type: 3}
+      propertyPath: HardThreshold
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a88608c15444e4c9b974882b478bcd, type: 3}

@@ -165,6 +165,11 @@ public class PlayerManager : MonoBehaviour
             PlayerProperties pp = gameObject.GetComponent<PlayerProperties>();
             pp.setShirtColor(playerColor);
 
+            if(_currPlayerCount == 1)
+            {
+                RoomManager.instance.StartGame();
+            }
+
             return player;
 		}
 

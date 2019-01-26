@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     public Animator anim;
 
+    private Tile _currTile;
+
 
 	void Start()
 	{
@@ -33,15 +35,36 @@ public class Player : MonoBehaviour
         Vector3 right = GetRightVector();
 
         Vector3 desiredDirection = Actions.Rotate.Y * away + Actions.Rotate.X * right;
-        Quaternion targetRotation = Quaternion.LookRotation(Vector3.Normalize(desiredDirection));
-
-        // Rotate our transform a step closer to the target's.
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, desiredDirection.magnitude * rotationSpeed * Time.deltaTime);
-
         float finalMoveSpeed = desiredDirection.magnitude * moveSpeed;
-        _cc.Move(transform.forward * finalMoveSpeed * Time.deltaTime);
 
+        if(desiredDirection.magnitude > 0.0f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(Vector3.Normalize(desiredDirection));
+
+            // Rotate our transform a step closer to the target's.
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, desiredDirection.magnitude * rotationSpeed * Time.deltaTime);
+
+            _cc.Move(transform.forward * finalMoveSpeed * Time.deltaTime);
+
+
+            this.UpdatePlayerTile();
+        }
         anim.SetFloat("MoveSpeed", finalMoveSpeed/2.0f);
+    }
+
+
+    void UpdatePlayerTile()
+    {   
+        //Clear previous tile
+        if(this._currTile != null)
+        {
+            _currTile.PlayerReference = null;
+        }
+
+
+        this._currTile = RoomManager.instance.GetTileAt(this.transform.position);
+        this._currTile.PlayerReference = this;
+
     }
 
 
