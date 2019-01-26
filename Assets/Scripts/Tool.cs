@@ -1,14 +1,14 @@
 public class Tool
 {
 
-    private readonly RoomManager.ToolType _toolType;
+    private readonly ToolType _toolType;
     
-    public Tool(RoomManager.ToolType toolType)
+    public Tool(ToolType toolType)
     {
         _toolType = toolType;
     }
     
-    public RoomManager.ToolType GetType()
+    public ToolType GetType()
     {
         return _toolType;
     }

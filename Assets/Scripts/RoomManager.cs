@@ -6,26 +6,6 @@ public class RoomManager : MonoBehaviour
 
     private MessType _state;
 
-    public enum MessType
-    {
-        Wet,
-        Clean,
-        Dirt, 
-        Dishes,
-        Clothes,
-        Trash,
-        DogShit,
-        Mud
-    }
-
-    public enum ToolType
-    {
-        Broom, 
-        Mop,
-        Rag,
-        Hand
-    }
-
     private void Start()
     {
         foreach (var tile in tiles)
@@ -34,7 +14,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public float GetCleanlinessLevel() 
+    public float GetCleanlinessLevel()
     {
         float cleanLevel = 0;
         foreach (var tile in tiles)
@@ -48,7 +28,7 @@ public class RoomManager : MonoBehaviour
         return cleanLevel;
     }
 
-    public void changeTileState(MessType state, PlayerBehavior playerBehavior)
+    public void ChangeTileState(MessType state, PlayerBehavior playerBehavior)
     {
         switch (state)
         {    case MessType.Clean:
@@ -75,10 +55,12 @@ public class RoomManager : MonoBehaviour
             case MessType.Mud:
                 this.HandleMudState(playerBehavior);
                 break;
+            default:
+                break;
         }
     }
 
-    public void getTileState()
+    public void GetTileState()
     {
         
     }
@@ -87,7 +69,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Rag)
         {
-            this.changeTileState(MessType.Clean, playerBehavior);
+            this.ChangeTileState(MessType.Clean, playerBehavior);
         }
     }
 
@@ -95,7 +77,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Broom)
         {
-            this.changeTileState(MessType.Clean, playerBehavior);
+            this.ChangeTileState(MessType.Clean, playerBehavior);
         }
     }
 
@@ -103,7 +85,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Hand)
         {
-            this.changeTileState(MessType.Clean, playerBehavior);
+            this.ChangeTileState(MessType.Clean, playerBehavior);
         }
     }
 
@@ -111,7 +93,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Hand)
         {
-            this.changeTileState(MessType.Clean, playerBehavior);
+            this.ChangeTileState(MessType.Clean, playerBehavior);
         }
     }
 
@@ -119,7 +101,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Hand)
         {
-            this.changeTileState(MessType.Clean, playerBehavior);
+            this.ChangeTileState(MessType.Clean, playerBehavior);
         }
     }
 
@@ -127,7 +109,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Hand)
         {
-            this.changeTileState(MessType.Mud, playerBehavior);
+            this.ChangeTileState(MessType.Mud, playerBehavior);
         }
     }
 
@@ -135,7 +117,7 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().GetType() == ToolType.Mop)
         {
-            this.changeTileState(MessType.Mud, playerBehavior);
+            this.ChangeTileState(MessType.Mud, playerBehavior);
         }
     }
     
