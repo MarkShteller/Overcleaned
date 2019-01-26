@@ -224,7 +224,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &575676969
@@ -420,26 +420,6 @@ PrefabInstance:
     - target: {fileID: 385642458593733156, guid: e7cc93355d76dc84aa768ec4072c88fc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642458193745754, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642457342420458, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642457990869202, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385642457528299380, guid: e7cc93355d76dc84aa768ec4072c88fc,
-        type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
