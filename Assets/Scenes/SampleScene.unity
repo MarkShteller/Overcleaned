@@ -268,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 259980226}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.7, y: -1.0546408, z: -0.7992387}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 22.408669, y: 22.408669, z: 22.408669}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -502,9 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: []
-  tiles2: []
-  character: {fileID: 0}
-  map: {fileID: 0}
+  Floor: {fileID: 259980226}
 --- !u!1 &2071033339
 GameObject:
   m_ObjectHideFlags: 0

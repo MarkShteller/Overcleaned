@@ -3,11 +3,11 @@
 public class RoomManager : MonoBehaviour
 {
     public Tile[] tiles;
-
-    private MessType _state;
+    public GameObject Floor;
 
     private void Start()
     {
+        BuildTileMap(Floor);
         foreach (var tile in tiles)
         {
             tile.IsClean = true;
@@ -33,6 +33,7 @@ public class RoomManager : MonoBehaviour
         switch (state)
         {    case MessType.Clean:
                 // base case
+                // trigger nice audio :D
                 break;
             case MessType.Wet:
                 this.HandleWetState(playerBehavior);
@@ -60,7 +61,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public MessType GetTileState(Tile tile)
+    public MessType GetTileMess(Tile tile)
     {
         return tile.TileObjectReference.Messtype;
     }
@@ -110,6 +111,7 @@ public class RoomManager : MonoBehaviour
         if (playerBehavior.GetTool().Tooltype == ToolType.Hand)
         {
             this.ChangeTileState(MessType.Mud, playerBehavior);
+            // mud audio from mud source
         }
     }
 
@@ -117,8 +119,33 @@ public class RoomManager : MonoBehaviour
     {
         if (playerBehavior.GetTool().Tooltype == ToolType.Mop)
         {
-            this.ChangeTileState(MessType.Mud, playerBehavior);
+            this.ChangeTileState(MessType.Wet, playerBehavior);
+            // water audio from audio source
         }
+    }
+    
+    // SHOULD BE IN OWN CLASS ->>>
+
+    private void BuildTileMap(GameObject floor)
+    {
+        Vector3 planeSize = this.GetFloorSize(floor);
+        Debug.Log(planeSize);
+
+        this.CreateTiles(10, planeSize);
+    }
+
+    private Vector3 GetFloorSize(GameObject floor)
+    {
+        return floor.GetComponent<Renderer>().bounds.size;
+    }
+
+    public void CreateTiles(int tileAmount, Vector3 planeSize)
+    {
+        Vector3 edgeA = transform.position + new Vector3(planeSize.x * transform.localScale.x / 2, 0, 0);
+        Vector3 edgeB = transform.position - new Vector3(planeSize.x * transform.localScale.x / 2, 0, 0);
+        Vector3 edgeC = transform.position + new Vector3(0, 0, planeSize.z * transform.localScale.y / 2);
+        Vector3 edgeD = transform.position - new Vector3(0, 0, planeSize.z * transform.localScale.y / 2);
+        Debug.DrawLine(planeSize, planeSize, Color.blue);
     }
     
 }
