@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Mess: MonoBehaviour, IInteractible
 {
+    public MessType Messtype { get; set; }
+    
     public void pickup(PlayerBehavior playerBehavior)
     {
         

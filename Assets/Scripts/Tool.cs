@@ -1,15 +1,6 @@
-public class Tool
-{
+using UnityEngine;
 
-    private readonly ToolType _toolType;
-    
-    public Tool(ToolType toolType)
-    {
-        _toolType = toolType;
-    }
-    
-    public ToolType GetType()
-    {
-        return _toolType;
-    }
+public class Tool: MonoBehaviour
+{
+    public ToolType Tooltype { get; set; }
 }

@@ -60,14 +60,14 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void GetTileState()
+    public MessType GetTileState(Tile tile)
     {
-        
+        return tile.TileObjectReference.Messtype;
     }
 
     private void HandleWetState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Rag)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Rag)
         {
             this.ChangeTileState(MessType.Clean, playerBehavior);
         }
@@ -75,7 +75,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleDirtState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Broom)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Broom)
         {
             this.ChangeTileState(MessType.Clean, playerBehavior);
         }
@@ -83,7 +83,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleDishState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Hand)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Hand)
         {
             this.ChangeTileState(MessType.Clean, playerBehavior);
         }
@@ -91,7 +91,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleClothesState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Hand)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Hand)
         {
             this.ChangeTileState(MessType.Clean, playerBehavior);
         }
@@ -99,7 +99,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleTrashState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Hand)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Hand)
         {
             this.ChangeTileState(MessType.Clean, playerBehavior);
         }
@@ -107,7 +107,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleShitState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Hand)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Hand)
         {
             this.ChangeTileState(MessType.Mud, playerBehavior);
         }
@@ -115,7 +115,7 @@ public class RoomManager : MonoBehaviour
 
     private void HandleMudState(PlayerBehavior playerBehavior)
     {
-        if (playerBehavior.GetTool().GetType() == ToolType.Mop)
+        if (playerBehavior.GetTool().Tooltype == ToolType.Mop)
         {
             this.ChangeTileState(MessType.Mud, playerBehavior);
         }
