@@ -2,29 +2,44 @@
 
 public class RoomManager : MonoBehaviour
 {
-    public GameObject Floor;
-    public int TilesX;
-    public int TilesY;
-
-    private Tile[] _tiles;
+    public float TileSize;
+    public Transform TopLeft;
+    public Transform BottomRight;
+    private Tile[,] _tiles;
+    
+    private Vector3 XBasis = new Vector3(1,0,0);
+    private Vector3 YBasis = new Vector3(0,0,-1);
 
     private void Start()
     {
-        BuildTileMap(Floor, TilesX, TilesY);
-        foreach (var tile in _tiles)
+        _tiles = MapBuilder.BuildTileMap(TopLeft.position, BottomRight.position, TileSize);
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < _tiles.GetLength(0); i++)
         {
-            tile.IsClean = true;
+            for (int j = 0; j < _tiles.GetLength(1); j++)
+            {   
+                
+                Debug.DrawLine(_tiles[i,j].TopLeft, _tiles[i,j].TopLeft + (XBasis * TileSize), Color.red);
+                Debug.DrawLine(_tiles[i,j].TopLeft, _tiles[i,j].TopLeft + (YBasis *TileSize), Color.red);
+            }
         }
+       
     }
 
     public float GetCleanlinessLevel()
     {
         float cleanLevel = 0;
-        foreach (var tile in _tiles)
+        for (int i = 0; i < _tiles.GetLength(0); i++)
         {
-            if (tile.IsClean) 
+            for (int j = 0; j < _tiles.GetLength(1); j++)
             {
-                cleanLevel++;
+                if (_tiles[i,j].IsClean) 
+                {
+                    cleanLevel++;
+                }
             }
         }
 
@@ -125,48 +140,5 @@ public class RoomManager : MonoBehaviour
             this.ChangeTileState(MessType.Wet, playerBehavior);
             // water audio from audio source
         }
-    }
-    
-    // SHOULD BE IN OWN CLASS ->>>
-    // MapBuilder.cs
-
-    private void BuildTileMap(GameObject floor, int x, int y)
-    {
-        Vector3 planeSize = this.GetFloorSize(floor);
-        this.CreateTiles(x, y, planeSize);
-    }
-
-    private Vector3 GetFloorSize(GameObject floor)
-    {
-        return floor.GetComponent<Renderer>().bounds.size;
-    }
-
-    private void CreateTiles(int cols, int rows, Vector3 planeSize)
-    {
-        int i = 0;
-
-        for (var x = 0; x < cols; x++)
-        {
-            for (var y = 0; y < rows; y++)
-            {
-                Tile t = new Tile(x, y);
-                _tiles[i] = t;
-                i++;
-            }
-        }
-    }
-
-    private void CalculatePhysicalLocation(Tile[] tiles, Vector3 planeSize)
-    {
-        float sizeX = planeSize.x;
-        float sizeY = planeSize.y;
-        float sizeZ = planeSize.z;
-
-        foreach (var tile in tiles)
-        {
-            tile.PhysicalX = tile.XLocation/planeSize.x;
-            tile.PhysicalY = tile.YLocation/planeSize.z;
-        }
-    }
-    
+    }   
 }

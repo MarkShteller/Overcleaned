@@ -18,7 +18,5 @@ public class Tile
     public Mess TileObjectReference { get; set; }
     public int XLocation { get; set; }
     public int YLocation { get; set; }
-    
-    public float PhysicalX { get; set; }
-    public float PhysicalY { get; set; }
+    public Vector3 TopLeft { get; set; }
 }
