@@ -2,13 +2,15 @@
 
 public class RoomManager : MonoBehaviour
 {
+    public static RoomManager instance;
+
     public float TileSize;
     public Transform TopLeft;
     public Transform BottomRight;
-    private Tile[,] _tiles;
     
     private Vector3 XBasis = new Vector3(1,0,0);
     private Vector3 YBasis = new Vector3(0,0,-1);
+    private Tile[,] _tiles;
 
     private void Start()
     {
@@ -26,7 +28,6 @@ public class RoomManager : MonoBehaviour
                 Debug.DrawLine(_tiles[i,j].TopLeft, _tiles[i,j].TopLeft + (YBasis *TileSize), Color.red);
             }
         }
-       
     }
 
     public float GetCleanlinessLevel()
