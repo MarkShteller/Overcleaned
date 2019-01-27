@@ -31,11 +31,11 @@ public class RoomManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }
-        AudioManager.Instance.PlayMainMusic();
     }
 
     private void Start()
     {
+        AudioManager.Instance.PlayMainMusic();
         _tiles = MapBuilder.BuildTileMap(TopLeft.position, BottomRight.position, TileSize);
     }
 
