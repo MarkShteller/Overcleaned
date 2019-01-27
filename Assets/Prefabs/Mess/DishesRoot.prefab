@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5363650587767268658}
   m_Layer: 0
   m_Name: DishesRoot
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3955e06a864d5bad59a74c18e3e627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Messtype: 2
 --- !u!1001 &8873254781409235925
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4752215866446402932}
   m_Layer: 0
   m_Name: MudRoot
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,17 +127,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2905818835729814138, guid: a397a61ccac6f1e4bb8f3551f7957d30,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65708
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905818835729814138, guid: a397a61ccac6f1e4bb8f3551f7957d30,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 0.65708
       objectReference: {fileID: 0}
     - target: {fileID: 2905818835729814138, guid: a397a61ccac6f1e4bb8f3551f7957d30,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.65708
-      objectReference: {fileID: 0}
-    - target: {fileID: 2905818835729814138, guid: a397a61ccac6f1e4bb8f3551f7957d30,
-        type: 3}
-      propertyPath: m_LocalScale.x
       value: 0.65708
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4137636356807009574}
   m_Layer: 0
   m_Name: WetRoot
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,17 +127,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8975183761412847996, guid: 85e17341f438cf842a9198f2bc947e29,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.73194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975183761412847996, guid: 85e17341f438cf842a9198f2bc947e29,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 0.73194
       objectReference: {fileID: 0}
     - target: {fileID: 8975183761412847996, guid: 85e17341f438cf842a9198f2bc947e29,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.73194
-      objectReference: {fileID: 0}
-    - target: {fileID: 8975183761412847996, guid: 85e17341f438cf842a9198f2bc947e29,
-        type: 3}
-      propertyPath: m_LocalScale.x
       value: 0.73194
       objectReference: {fileID: 0}
     m_RemovedComponents: []

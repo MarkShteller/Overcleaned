@@ -19,6 +19,12 @@ public class Tile
         }
     }
 
+    public bool IsEmpty { get
+        {
+            return this.IsClean && !this.HasPlayer;
+        }
+    }
+
     public Mess MessReference { get; set; }
     public Player PlayerReference { get; set; }
     public int XLocation { get; set; }

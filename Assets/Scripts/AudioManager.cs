@@ -70,29 +70,21 @@ public class AudioManager : MonoBehaviour
     public void PlayMessFX(MessType mess)
     {
         switch (mess)
-        {    case MessType.Clean:
-                MessFXSource.clip = cleanClip;
-                break;
+        {    
             case MessType.Wet:
                 MessFXSource.clip = wetClip;
                 break;
-            case MessType.Dirt:
+            case MessType.Mud:
                 MessFXSource.clip = dirtClip;
                 break;
             case MessType.Dishes:
                 MessFXSource.clip = dishClip;
                 break;
-            case MessType.Clothes:
-                MessFXSource.clip = clothClip;
-                break;
             case MessType.Trash:
                 MessFXSource.clip = trashClip;
                 break;
-            case MessType.DogShit:
+            case MessType.Poop:
                 MessFXSource.clip = shitClip;
-                break;
-            case MessType.Mud:
-                MessFXSource.clip = mudClip;
                 break;
             default:
                 MessFXSource.clip = cleanClip;
