@@ -14,6 +14,8 @@ public class RoomManager : MonoBehaviour
     public List<GameObject> EasyMessPrefabs;
     public List<GameObject> HardMessPrefabs;
 
+    public GameObject MudPrefab;
+
     //Game Difficulty tuning
     public AnimationCurve DifficultyCurve;
     public float MaxSpawnInterval;
@@ -118,7 +120,7 @@ public class RoomManager : MonoBehaviour
             int yIdx = UnityEngine.Random.Range(0, this._tiles.GetLength(1));
 
             Tile t = _tiles[xIdx, yIdx];
-            bool canSpawn = t.IsClean && !t.HasPlayer;
+            bool canSpawn = t.IsEmpty;
 
             if (canSpawn)
             {
@@ -127,7 +129,6 @@ public class RoomManager : MonoBehaviour
                 //weight mess based on difficulty level
                 if (hard)
                 {
-                    Debug.Log("SPAWNING HARD MESS");
                     foreach( GameObject hardMess in HardMessPrefabs)
                     {
                         messPrefabs.Add(hardMess);
@@ -139,10 +140,7 @@ public class RoomManager : MonoBehaviour
                 Vector3 jitterVector = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(-1.0f,1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f))) * TileSize * 0.3f;
                 Vector3 spawnPoint = t.GetCenter(TileSize) + jitterVector;
 
-                GameObject inst = GameObject.Instantiate(prefab, spawnPoint, Quaternion.identity);
-                Mess messInst = inst.GetComponent<Mess>();
-                //call mess lifecycle method
-                messInst.dropOn(t);
+                MakeAMess(prefab, spawnPoint, t);
 
                 return true;
             }
@@ -150,6 +148,14 @@ public class RoomManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void MakeAMess(GameObject prefab, Vector3 spawnPoint, Tile t)
+    {
+        GameObject inst = GameObject.Instantiate(prefab, spawnPoint, Quaternion.identity);
+        Mess messInst = inst.GetComponent<Mess>();
+        //call mess lifecycle method
+        messInst.dropOn(t);
     }
 
 

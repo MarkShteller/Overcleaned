@@ -137,6 +137,8 @@ MonoBehaviour:
   - {fileID: 2714070887324543505, guid: aaf3570306bbb8c43a3aae2c53559fb7, type: 3}
   HardMessPrefabs:
   - {fileID: 1896793676681004682, guid: f276f0efb7b1b704fb56f66bdeda18e5, type: 3}
+  MudPrefab: {fileID: 6404739498666469353, guid: 482a62ce293adf0429bb7fd6e06a030c,
+    type: 3}
   DifficultyCurve:
     serializedVersion: 2
     m_Curve:

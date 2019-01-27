@@ -8,7 +8,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
     private Tile _currTile;
 
     private Player _heldPlayer;
-
+    
 
     public void dropOn(Tile tile)
     {
@@ -18,17 +18,25 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     public void OnPickUp(Player player)
     {
+        //Cache Position before player picks it up
+        Vector3 prePickUpPos = transform.position;
+        Tile prePickUpTile = this._currTile;
+
         this._heldPlayer = player;
         this.cleanUp();
         //Attach to players handpoint
-
         player.HoldGameObject(this);
+
+        if(Messtype == MessType.Poop)
+        {
+            RoomManager.instance.MakeAMess(RoomManager.instance.MudPrefab, prePickUpPos, prePickUpTile);
+        }
 
     }
 
     public bool OnTryDrop()
     {
-        if (Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes)
+        if (Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes || Messtype == MessType.Poop)
         {
             Tile underlyingTile = RoomManager.instance.GetTileAt(transform.position);
 
@@ -89,7 +97,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     public void interact(Player player)
     {
-        if(Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes)
+        if(Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes || Messtype == MessType.Poop)
         {
             if (!player.IsHoldingObject())
             {
