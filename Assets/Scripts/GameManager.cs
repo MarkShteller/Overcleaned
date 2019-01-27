@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void AddDishwasherItem()
     {
         print("adding to dishwasher curr cap: "+ DishWasherCapacity);
+        AudioManager.Instance.PlayDishWasherFx();
         if (!isDishwasherFull)
         {
             DishWasherCapacity++;
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
     public void AddWasherItem()
     {
         print("adding to washer curr cap: " + WasherCapacity);
+        AudioManager.Instance.PlayWasherFx();
         if (!isWasherFull)
         {
             WasherCapacity++;
@@ -100,12 +102,14 @@ public class GameManager : MonoBehaviour
         isDishwasherFull = true;
         float maxTimer = 8;
         float dishwasherCooldown = maxTimer;
+        
         while (dishwasherCooldown >= 0)
         {
             dishwasherCooldown -= Time.deltaTime;
             UIManager.Instance.UpdateDishwasherSlider(dishwasherCooldown / maxTimer);
             yield return null;
         }
+        
         DishWasherCapacity = 0;
         isDishwasherFull = false;
     }
