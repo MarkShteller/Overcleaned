@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance = null;
 
+    private delegate void PlaySoundDelegate();
+    private PlaySoundDelegate _PlaySound;
+
     private void Awake()
     {
         if (Instance == null)
@@ -94,12 +97,12 @@ public class AudioManager : MonoBehaviour
         MessFXSource.Play();
     }
     
-    public void PlayTrashFX(AudioClip clip)
+    public void PlayTrashFX()
     {
         TrashFXSource.Play();
     }
     
-    public void PlayWasherFX(AudioClip clip)
+    public void PlayWasherFX()
     {
         WasherFXSource.loop = true;
         WasherFXSource.Play();
@@ -110,7 +113,7 @@ public class AudioManager : MonoBehaviour
         WasherFXSource.Stop();
     }
     
-    public void PlayDishWasherFX(AudioClip clip)
+    public void PlayDishWasherFX()
     {
         DishWasherFXSource.loop = true;
         DishWasherFXSource.Play();
@@ -121,7 +124,7 @@ public class AudioManager : MonoBehaviour
         DishWasherFXSource.Stop();
     }
     
-    public void PlayWindowFX(AudioClip clip)
+    public void PlayWindowFX()
     {
         WindowFXSource.Play();
     }
@@ -135,6 +138,12 @@ public class AudioManager : MonoBehaviour
     {
         MainMusic.pitch = 1.0f;
         MainMusic.Play();
+    }
+
+    public void StopMainMusic()
+    {
+        MusicGroup.audioMixer.SetFloat("pitchBend", 1f);
+        MainMusic.Stop();
     }
 
     public void ChangePitchBendMusic(float PitchBendAmount)
