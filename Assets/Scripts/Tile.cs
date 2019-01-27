@@ -34,6 +34,7 @@ public class Tile
     public void AddMess(Mess mess)
     {
         GameManager.Instance.ChangeCleanliness(-cleanlinessValue);
+        AudioManager.Instance.PlayMessFX(mess.Messtype);
         MessReference = mess;
     }
 

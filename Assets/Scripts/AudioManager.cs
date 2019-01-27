@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEditor.iOS;
+using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
@@ -18,6 +20,9 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup MusicGroup;
     public AudioMixerGroup SFXGroup;
 
+    private AudioClip cleanClip, wetClip, dirtClip, dishClip, 
+                      clothClip, trashClip, shitClip, mudClip;
+
     public static AudioManager Instance = null;
 
     private void Awake()
@@ -31,13 +36,51 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        MainMusic.outputAudioMixerGroup = MusicGroup;
+        MessFXSource.outputAudioMixerGroup = SFXGroup;
+        cleanClip = Resources.Load<AudioClip>("SFX/CleanTile1");
+        wetClip = Resources.Load<AudioClip>("SFX/Wet1");
+        dirtClip = Resources.Load<AudioClip>("SFX/SweepDirt1");
+        dishClip = Resources.Load<AudioClip>("SFX/Dishes1");
+        clothClip = Resources.Load<AudioClip>("SFX/OutWindow2");
+        trashClip = Resources.Load<AudioClip>("SFX/TrashTile1");
+        shitClip = Resources.Load<AudioClip>("SFX/DogShit1");
+        mudClip = Resources.Load<AudioClip>("SFX/Mud1");
+        
         DontDestroyOnLoad (gameObject);
     }
     
-    public void PlayMessFX(AudioClip clip)
+    public void PlayMessFX(MessType mess)
     {
-        MessFXSource.clip = clip;
-        MessFXSource.outputAudioMixerGroup = SFXGroup;
+        switch (mess)
+        {    case MessType.Clean:
+                MessFXSource.clip = cleanClip;
+                break;
+            case MessType.Wet:
+                MessFXSource.clip = wetClip;
+                break;
+            case MessType.Dirt:
+                MessFXSource.clip = dirtClip;
+                break;
+            case MessType.Dishes:
+                MessFXSource.clip = dishClip;
+                break;
+            case MessType.Clothes:
+                MessFXSource.clip = clothClip;
+                break;
+            case MessType.Trash:
+                MessFXSource.clip = trashClip;
+                break;
+            case MessType.DogShit:
+                MessFXSource.clip = shitClip;
+                break;
+            case MessType.Mud:
+                MessFXSource.clip = mudClip;
+                break;
+            default:
+                break;
+        }
+
         MessFXSource.Play();
     }
     
@@ -81,7 +124,6 @@ public class AudioManager : MonoBehaviour
     public void PlayMainMusic()
     {
         MainMusic.pitch = 1.0f;
-        MainMusic.outputAudioMixerGroup = MusicGroup;
         MainMusic.Play();
     }
 

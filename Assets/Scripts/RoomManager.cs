@@ -20,9 +20,6 @@ public class RoomManager : MonoBehaviour
     public float MinSpawnInterval;
     public float MinutesToMinInterval;
     public float HardThreshold;
-
-    public delegate void OnInteractWithTile(AudioClip clip);
-    public OnInteractWithTile onInteractWithTile;
     
     private Tile[,] _tiles;
 
