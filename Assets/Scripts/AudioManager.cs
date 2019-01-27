@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
@@ -108,6 +109,11 @@ public class AudioManager : MonoBehaviour
         WasherFXSource.Play();
     }
 
+    public bool IsWasherFxPlaying()
+    {
+        return WasherFXSource.isPlaying;
+    }
+
     public void StopWasherFx()
     {
         WasherFXSource.Stop();
@@ -118,6 +124,11 @@ public class AudioManager : MonoBehaviour
         DishWasherFXSource.volume = 0.4f;
         DishWasherFXSource.loop = true;
         DishWasherFXSource.Play();
+    }
+    
+    public bool IsDishWasherFxPlaying()
+    {
+        return DishWasherFXSource.isPlaying;
     }
 
     public void StopDishWasherFx()

@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
     public void AddDishwasherItem(Animator animator)
     {
         print("adding to dishwasher curr cap: "+ DishWasherCapacity);
-        AudioManager.Instance.PlayDishWasherFx();
+
+        AudioManager audioManager = AudioManager.Instance;
+        if (!audioManager.IsDishWasherFxPlaying())
+        {
+            audioManager.PlayDishWasherFx();
+        }
         if (!isDishwasherFull)
         {
             DishWasherCapacity++;
@@ -69,7 +74,11 @@ public class GameManager : MonoBehaviour
     public void AddWasherItem(Animator animator)
     {
         print("adding to washer curr cap: " + WasherCapacity);
-        AudioManager.Instance.PlayWasherFx();
+        AudioManager audioManager = AudioManager.Instance;
+        if (!audioManager.IsWasherFxPlaying())
+        {
+            AudioManager.Instance.PlayWasherFx();
+        }
         if (!isWasherFull)
         {
             WasherCapacity++;
