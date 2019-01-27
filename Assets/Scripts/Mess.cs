@@ -30,22 +30,21 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         this.cleanUp();
         //Attach to players handpoint
 
+        player.HoldGameObject(this);
+
     }
 
     public bool OnTryDrop()
     {
-        if (Messtype == MessType.Trash)
+        if (Messtype == MessType.Trash || Messtype == MessType.Dishes)
         {
             Tile underlyingTile = RoomManager.instance.GetTileAt(transform.position);
 
             if (underlyingTile.IsEmpty)
             {
                 this.dropOn(underlyingTile);
-                //Re-enable collider
-                collider.enabled = true;
-                transform.position = underlyingTile.GetCenter(RoomManager.instance.TileSize);
-                transform.rotation = Quaternion.identity;
-
+                this._heldPlayer.DropGameObject(underlyingTile.GetCenter(RoomManager.instance.TileSize));
+                this._heldPlayer = null;
                 return true;
             }
 
@@ -62,6 +61,11 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         return this._heldPlayer;
     }
 
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
 
     public void cleanUp()
     {
@@ -76,9 +80,13 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     public void interact(Player player)
     {
-        if(Messtype == MessType.Trash)
+        if(Messtype == MessType.Trash || Messtype == MessType.Dishes)
         {
-            this.OnPickUp(player);
+            if (!player.IsHoldingObject())
+            {
+                this.OnPickUp(player);
+            }
+            
         }
     }
 }

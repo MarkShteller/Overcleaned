@@ -71,31 +71,51 @@ public class Player : MonoBehaviour
         //Interact
         if (Actions.Green.WasPressed)
         {
-            this._currFocusedInteractable.interact(this);
+            if(this._currFocusedInteractable != null)
+            {
+                this._currFocusedInteractable.interact(this);
+            }
         }
 
         //Drop
         if (Actions.Red.WasPressed)
         {
-            this._currFocusedInteractable.interact(this);
+            if (this._currentHeld != null)
+            {
+                this._currentHeld.OnTryDrop();
+            }
         }
 
     }
 
 
-    public void HoldGameObject(GameObject obj)
+    public void HoldGameObject(IHoldable obj)
     {
-        obj.parent = PlayerHand;
-        obj.transform.position = Vector3.zero;
-        obj.transfrom.rotation = Quaternion.identity;
+        GameObject gObj = obj.GetGameObject();
+        gObj.transform.parent = PlayerHand.transform;
+        gObj.transform.localPosition = Vector3.zero;
+        gObj.transform.localRotation = Quaternion.identity;
 
-        this._currentHeld = obj.GetComponent<IHoldable>();
+        gObj.GetComponent<Collider>().enabled = false;
+        this._currentHeld = obj;
     }
 
 
-    public void DropGameObject(GameObject obj)
+    public void DropGameObject(Vector3 position)
     {
+        GameObject gObj = this._currentHeld.GetGameObject();
+        gObj.transform.parent = null;
+        gObj.transform.position = position;
+        gObj.transform.rotation = Quaternion.identity;
 
+        gObj.GetComponent<Collider>().enabled = true;
+        this._currentHeld = null;
+    }
+
+
+    public bool IsHoldingObject()
+    {
+        return this._currentHeld != null;
     }
 
 

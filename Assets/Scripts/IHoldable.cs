@@ -6,5 +6,7 @@ public interface IHoldable
     bool OnTryDrop();
 
     Player GetPlayer();
+
+    GameObject GetGameObject();
 }
 
