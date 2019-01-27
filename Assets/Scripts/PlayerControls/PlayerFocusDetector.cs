@@ -30,10 +30,15 @@ public class PlayerFocusDetector : MonoBehaviour
         if (col.tag == "interactable")
         {
             IInteractable iObj = col.gameObject.GetComponent<IInteractable>();
-            if (_set.Contains(iObj))
-            {
-                _set.Remove(iObj);
-            }
+            RemoveObject(iObj);
+        }
+    }
+
+    public void RemoveObject(IInteractable iObj)
+    {
+        if (_set.Contains(iObj))
+        {
+            _set.Remove(iObj);
         }
     }
 
@@ -49,12 +54,15 @@ public class PlayerFocusDetector : MonoBehaviour
         IInteractable closest = null;
         foreach (IInteractable interactable in _set)
         {
-            float currDistance = (interactable.GetPosition() - playerPosition).magnitude;
-             if(currDistance < distance)
-             {
-                closest = interactable;
-                distance = currDistance;
-             }
+            if (interactable.CanInteract())
+            {
+                float currDistance = (interactable.GetPosition() - playerPosition).magnitude;
+                if(currDistance < distance)
+                {
+                    closest = interactable;
+                    distance = currDistance;
+                }
+            }
         }
 
         return closest;

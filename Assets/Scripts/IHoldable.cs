@@ -8,5 +8,9 @@ public interface IHoldable
     Player GetPlayer();
 
     GameObject GetGameObject();
+
+    bool IsDispensable();
+
+    void OnDispense();
 }
 

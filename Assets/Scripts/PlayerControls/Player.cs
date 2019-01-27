@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public MeshRenderer FocusArrow;
 
     private IInteractable _currFocusedInteractable;
-    private IHoldable _currentHeld;
+    public IHoldable _currentHeld;
 
     public GameObject PlayerHand;
 

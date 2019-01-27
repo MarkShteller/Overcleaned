@@ -66,6 +66,25 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         return gameObject;
     }
 
+    public bool IsDispensable()
+    {
+        return true;
+    }
+
+
+    public void OnDispense()
+    {
+        this._heldPlayer._currentHeld = null;
+        this._heldPlayer = null;
+        this.enabled = false;
+        Destroy(this.gameObject);
+    }
+
+
+    public bool CanInteract()
+    {
+        return this._heldPlayer == null;
+    }
 
     public void cleanUp()
     {
@@ -84,6 +103,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         {
             if (!player.IsHoldingObject())
             {
+                player.FocusDetector.RemoveObject(this);
                 this.OnPickUp(player);
             }
             
