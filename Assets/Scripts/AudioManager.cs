@@ -58,7 +58,6 @@ public class AudioManager : MonoBehaviour
         TrashFXSource.clip = trashBinClip;
         WasherFXSource.clip = washerClip;
         DishWasherFXSource.clip = washerClip;
-        WindowFXSource.clip = outWindowClip;
         DoorFXSource.clip = closetClip;
         
         TrashFXSource.outputAudioMixerGroup = SFXGroup;
@@ -70,7 +69,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad (gameObject);
     }
     
-    public void PlayMessFX(MessType mess)
+    public void PlayMessFx(MessType mess)
     {
         switch (mess)
         {    
@@ -78,7 +77,7 @@ public class AudioManager : MonoBehaviour
                 MessFXSource.clip = wetClip;
                 break;
             case MessType.Mud:
-                MessFXSource.clip = dirtClip;
+                MessFXSource.clip = mudClip;
                 break;
             case MessType.Dishes:
                 MessFXSource.clip = dishClip;
@@ -90,43 +89,47 @@ public class AudioManager : MonoBehaviour
                 MessFXSource.clip = shitClip;
                 break;
             default:
-                MessFXSource.clip = cleanClip;
+                MessFXSource.clip = trashClip;
                 break;
         }
 
         MessFXSource.Play();
     }
     
-    public void PlayTrashFX()
+    public void PlayTrashFx()
     {
         TrashFXSource.Play();
     }
     
-    public void PlayWasherFX()
+    public void PlayWasherFx()
     {
+        WasherFXSource.volume = 0.4f;
         WasherFXSource.loop = true;
         WasherFXSource.Play();
     }
 
-    public void StopWasherFX()
+    public void StopWasherFx()
     {
         WasherFXSource.Stop();
     }
     
-    public void PlayDishWasherFX()
+    public void PlayDishWasherFx()
     {
+        DishWasherFXSource.volume = 0.4f;
         DishWasherFXSource.loop = true;
         DishWasherFXSource.Play();
     }
 
-    public void StopDishWasherFX()
+    public void StopDishWasherFx()
     {
         DishWasherFXSource.Stop();
     }
     
-    public void PlayWindowFX()
+    public void PlayToolCleanFx(ToolType tool)
     {
+        WindowFXSource.clip = tool == ToolType.Broom ? dirtClip : outWindowClip;
         WindowFXSource.Play();
+
     }
     
     public void PlayDoorFx(AudioClip clip)
@@ -144,6 +147,8 @@ public class AudioManager : MonoBehaviour
     {
         MusicGroup.audioMixer.SetFloat("pitchBend", 1f);
         MainMusic.Stop();
+        StopDishWasherFx();
+        StopWasherFx();
     }
 
     public void ChangePitchBendMusic(float PitchBendAmount)
