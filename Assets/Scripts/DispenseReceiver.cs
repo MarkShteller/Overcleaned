@@ -59,6 +59,14 @@ public class DispenseReceiver : MonoBehaviour, IInteractable
                         GameManager.Instance.AddWasherItem(animator);
                     }
                 }
+
+                if (this.type == DispenseReceiverType.Closet)
+                {
+                    if (mess.Messtype == MessType.Clothes || mess.Messtype == MessType.Trash)
+                    {
+                        mess.OnDispense();
+                    }
+                }
             }
         }
     }
