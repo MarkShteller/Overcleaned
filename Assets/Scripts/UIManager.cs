@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Slider scoreSlider;
+    public Slider washerSlider;
+    public Slider dishWasherSlider;
 
     public static UIManager Instance;
 
@@ -41,6 +43,16 @@ public class UIManager : MonoBehaviour
     public void SetGameTimer(float time)
     {
         gameTimer = time;
+    }
+
+    public void UpdateDishwasherSlider(float value)
+    {
+        dishWasherSlider.value = value;
+    }
+
+    public void UpdateWasherSlider(float value)
+    {
+        washerSlider.value = value;
     }
 
     public void UpdateScoreSlider(float value)

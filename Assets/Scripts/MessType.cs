@@ -4,5 +4,6 @@ public enum MessType
     Mud, 
     Dishes,
     Trash,
+    Clothes,
     Poop
 }

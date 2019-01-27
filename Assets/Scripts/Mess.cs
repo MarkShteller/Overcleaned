@@ -36,7 +36,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     public bool OnTryDrop()
     {
-        if (Messtype == MessType.Trash || Messtype == MessType.Dishes)
+        if (Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes)
         {
             Tile underlyingTile = RoomManager.instance.GetTileAt(transform.position);
 
@@ -99,7 +99,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     public void interact(Player player)
     {
-        if(Messtype == MessType.Trash || Messtype == MessType.Dishes)
+        if(Messtype == MessType.Trash || Messtype == MessType.Dishes || Messtype == MessType.Clothes)
         {
             if (!player.IsHoldingObject())
             {

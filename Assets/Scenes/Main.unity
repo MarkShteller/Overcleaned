@@ -2402,17 +2402,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
-        type: 3}
-      propertyPath: EasyMessPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
-        type: 3}
-      propertyPath: EasyMessPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 775652213034895851, guid: d18b63fb0bfb87847a7e0ffec84b166e,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a88608c15444e4c9b974882b478bcd, type: 3}
 --- !u!1001 &5950863160502531

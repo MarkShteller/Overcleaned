@@ -1574,8 +1574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreSlider: {fileID: 6002936302730338261}
-  washerSlider: {fileID: 0}
-  dishWasherSlider: {fileID: 0}
+  washerSlider: {fileID: 717633929}
+  dishWasherSlider: {fileID: 679187937}
   GameTimerText: {fileID: 559760969}
   titleDishwasher: {fileID: 6002936302546656610}
   titleWasher: {fileID: 6002936303800647386}
