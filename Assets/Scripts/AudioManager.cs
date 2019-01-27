@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource MainMusic;
     
     public AudioSource MessFXSource;
+
     public AudioSource TrashFXSource;
     public AudioSource WasherFXSource;
     public AudioSource DishWasherFXSource;
@@ -19,7 +20,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup SFXGroup;
 
     private AudioClip cleanClip, wetClip, dirtClip, dishClip, 
-                      clothClip, trashClip, shitClip, mudClip;
+                      clothClip, trashClip, shitClip, mudClip,
+                      trashBinClip, washerClip, outWindowClip, closetClip;
 
     public static AudioManager Instance = null;
 
@@ -44,6 +46,23 @@ public class AudioManager : MonoBehaviour
         trashClip = Resources.Load<AudioClip>("SFX/TrashTile1");
         shitClip = Resources.Load<AudioClip>("SFX/DogShit1");
         mudClip = Resources.Load<AudioClip>("SFX/Mud1");
+
+        trashBinClip = Resources.Load<AudioClip>("SFX/TrashBin1");
+        washerClip = Resources.Load<AudioClip>("SFX/Dishwasher1");
+        outWindowClip = Resources.Load<AudioClip>("SFX/OutWindow1");
+        closetClip = Resources.Load<AudioClip>("SFX/OpenCloset1");
+        
+        TrashFXSource.clip = trashBinClip;
+        WasherFXSource.clip = washerClip;
+        DishWasherFXSource.clip = washerClip;
+        WindowFXSource.clip = outWindowClip;
+        DoorFXSource.clip = closetClip;
+        
+        TrashFXSource.outputAudioMixerGroup = SFXGroup;
+        WasherFXSource.outputAudioMixerGroup = SFXGroup;
+        DishWasherFXSource.outputAudioMixerGroup = SFXGroup;
+        WindowFXSource.outputAudioMixerGroup = SFXGroup;
+        DoorFXSource.outputAudioMixerGroup = SFXGroup;
         
         DontDestroyOnLoad (gameObject);
     }
@@ -76,6 +95,7 @@ public class AudioManager : MonoBehaviour
                 MessFXSource.clip = mudClip;
                 break;
             default:
+                MessFXSource.clip = cleanClip;
                 break;
         }
 
@@ -84,38 +104,38 @@ public class AudioManager : MonoBehaviour
     
     public void PlayTrashFX(AudioClip clip)
     {
-        TrashFXSource.clip = clip;
-        TrashFXSource.outputAudioMixerGroup = SFXGroup;
         TrashFXSource.Play();
     }
     
     public void PlayWasherFX(AudioClip clip)
     {
-        WasherFXSource.clip = clip;
-        WasherFXSource.outputAudioMixerGroup = SFXGroup;
+        WasherFXSource.loop = true;
         WasherFXSource.Play();
-        // This one can loop
+    }
+
+    public void StopWasherFX()
+    {
+        WasherFXSource.Stop();
     }
     
     public void PlayDishWasherFX(AudioClip clip)
     {
-        DishWasherFXSource.clip = clip;
-        DishWasherFXSource.outputAudioMixerGroup = SFXGroup;
+        DishWasherFXSource.loop = true;
         DishWasherFXSource.Play();
-        // This one can loop
+    }
+
+    public void StopDishWasherFX()
+    {
+        DishWasherFXSource.Stop();
     }
     
     public void PlayWindowFX(AudioClip clip)
     {
-        WindowFXSource.clip = clip;
-        WindowFXSource.outputAudioMixerGroup = SFXGroup;
         WindowFXSource.Play();
     }
     
     public void PlayDoorFx(AudioClip clip)
     {
-        DoorFXSource.clip = clip;
-        DoorFXSource.outputAudioMixerGroup = SFXGroup;
         DoorFXSource.Play();
     }
     
