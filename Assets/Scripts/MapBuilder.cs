@@ -27,7 +27,6 @@ public static class MapBuilder
                 Vector3 ActualPhysicalLocation = origin + OffsetX + OffsetY;
                 Tile t = new Tile(x, y);
                 t.TopLeft = ActualPhysicalLocation;
-                t.IsClean = true;
                 tiles[x, y] = t;
             }
         }
