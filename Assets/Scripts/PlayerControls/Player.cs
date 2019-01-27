@@ -24,7 +24,11 @@ public class Player : MonoBehaviour
 
     public PlayerFocusDetector FocusDetector;
     public MeshRenderer FocusArrow;
+
     private IInteractable _currFocusedInteractable;
+    private IHoldable _currentHeld;
+
+    public GameObject PlayerHand;
 
 
 	void Start()
@@ -48,7 +52,14 @@ public class Player : MonoBehaviour
             // Rotate our transform a step closer to the target's.
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, desiredDirection.magnitude * rotationSpeed * Time.deltaTime);
 
-            _cc.Move(transform.forward * finalMoveSpeed * Time.deltaTime);
+            Vector3 moveVector = transform.forward * finalMoveSpeed;
+
+            if(transform.position.y > 0.0f)
+            {
+                moveVector += Vector3.up * -1.0f * 2.0f;
+            }
+
+            _cc.Move(moveVector * Time.deltaTime);
 
 
             this.UpdatePlayerTile();
@@ -56,6 +67,35 @@ public class Player : MonoBehaviour
         anim.SetFloat("MoveSpeed", finalMoveSpeed/2.0f);
 
         UpdateFocusedInteractable();
+
+        //Interact
+        if (Actions.Green.WasPressed)
+        {
+            this._currFocusedInteractable.interact(this);
+        }
+
+        //Drop
+        if (Actions.Red.WasPressed)
+        {
+            this._currFocusedInteractable.interact(this);
+        }
+
+    }
+
+
+    public void HoldGameObject(GameObject obj)
+    {
+        obj.parent = PlayerHand;
+        obj.transform.position = Vector3.zero;
+        obj.transfrom.rotation = Quaternion.identity;
+
+        this._currentHeld = obj.GetComponent<IHoldable>();
+    }
+
+
+    public void DropGameObject(GameObject obj)
+    {
+
     }
 
 

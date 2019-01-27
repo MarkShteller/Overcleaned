@@ -1,11 +1,8 @@
 public enum MessType
 {
     Wet,
-    Clean,
-    Dirt, 
+    Mud, 
     Dishes,
-    Clothes,
     Trash,
-    DogShit,
-    Mud
+    Poop
 }
