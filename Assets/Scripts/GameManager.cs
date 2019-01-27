@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddDishwasherItem()
+    public void AddDishwasherItem(Animator animator)
     {
         print("adding to dishwasher curr cap: "+ DishWasherCapacity);
         if (!isDishwasherFull)
@@ -60,12 +60,12 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateDishwasherSlider(percent);
             if (percent == 1)
             {
-                StartCoroutine(WashDishes());
+                StartCoroutine(WashDishes(animator));
             }
         }
     }
 
-    public void AddWasherItem()
+    public void AddWasherItem(Animator animator)
     {
         print("adding to washer curr cap: " + WasherCapacity);
         if (!isWasherFull)
@@ -75,14 +75,16 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateWasherSlider(percent);
             if (percent == 1)
             {
-                StartCoroutine(WashClothes());
+                StartCoroutine(WashClothes(animator));
             }
         }
     }
 
-    private IEnumerator WashClothes()
+    private IEnumerator WashClothes(Animator animator)
     {
         isWasherFull = true;
+        animator.SetBool("Washing", isWasherFull);
+
         float maxTimer = 8;
         float washerCooldown = maxTimer;
         while (washerCooldown >= 0)
@@ -93,11 +95,13 @@ public class GameManager : MonoBehaviour
         }
         WasherCapacity = 0;
         isWasherFull = false;
+        animator.SetBool("Washing", isWasherFull);
     }
 
-    private IEnumerator WashDishes()
+    private IEnumerator WashDishes(Animator animator)
     {
         isDishwasherFull = true;
+        animator.SetBool("Washing", isDishwasherFull);
         float maxTimer = 8;
         float dishwasherCooldown = maxTimer;
         while (dishwasherCooldown >= 0)
@@ -108,6 +112,7 @@ public class GameManager : MonoBehaviour
         }
         DishWasherCapacity = 0;
         isDishwasherFull = false;
+        animator.SetBool("Washing", isDishwasherFull);
     }
 
     public void ChangeCleanliness(float value)
