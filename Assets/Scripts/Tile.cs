@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-
 public class Tile
 {
-    
+    private float cleanlinessValue = 0.02f;
+
     public Tile(int x, int y)
     {
         XLocation = x;
@@ -29,5 +29,17 @@ public class Tile
     {
         Vector3 offset = (new Vector3(1, 0, -1)) * tileSize * 0.5f;
         return TopLeft + offset;
+    }
+
+    public void AddMess(Mess mess)
+    {
+        GameManager.Instance.ChangeCleanliness(-cleanlinessValue);
+        MessReference = mess;
+    }
+
+    public void CleanMess()
+    {
+        MessReference = null;
+        GameManager.Instance.ChangeCleanliness(cleanlinessValue);
     }
 }

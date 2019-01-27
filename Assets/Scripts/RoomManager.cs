@@ -41,7 +41,7 @@ public class RoomManager : MonoBehaviour
         _tiles = MapBuilder.BuildTileMap(TopLeft.position, BottomRight.position, TileSize);
     }
 
-    private void Update()
+    /*private void Update()
     {
         for (int i = 0; i < _tiles.GetLength(0); i++)
         {
@@ -65,7 +65,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     public void StartGame()
     {

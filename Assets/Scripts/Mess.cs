@@ -14,7 +14,7 @@ public class Mess: MonoBehaviour, IInteractible
 
     public void dropOn(Tile tile)
     {
-        tile.MessReference = this;
+        tile.AddMess(this);
         this._currTile = tile;
     }
 
@@ -26,7 +26,7 @@ public class Mess: MonoBehaviour, IInteractible
 
     public void cleanUp()
     {
-        this._currTile.MessReference = null;
+        this._currTile.CleanMess();
         this._currTile = null;
     }
 }
