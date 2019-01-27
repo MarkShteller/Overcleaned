@@ -118,6 +118,18 @@ public class Player : MonoBehaviour
         return this._currentHeld != null;
     }
 
+    public ToolType CurentlyHeldToolType()
+    {
+        if(!this.IsHoldingObject()) { return ToolType.None;  }
+
+        Tool t = this._currentHeld.GetGameObject().GetComponent<Tool>();
+        
+        if(t == null) { return ToolType.None; }
+
+        return t.type;
+
+    }
+
 
     void UpdatePlayerTile()
     {   

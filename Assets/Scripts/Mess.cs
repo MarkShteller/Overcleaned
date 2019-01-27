@@ -98,5 +98,16 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
             }
             
         }
+
+        ToolType cT = player.CurentlyHeldToolType();
+       
+        if( Messtype == MessType.Wet && cT == ToolType.Mop ||
+            Messtype == MessType.Mud && cT == ToolType.Broom)
+        {
+            player.FocusDetector.RemoveObject(this);
+            this.cleanUp();
+            Destroy(this.gameObject);
+        }
+
     }
 }
