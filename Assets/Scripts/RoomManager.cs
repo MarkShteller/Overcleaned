@@ -35,7 +35,7 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.PlayMainMusic();
+        AudioManager.Instance?.PlayMainMusic();
         _tiles = MapBuilder.BuildTileMap(TopLeft.position, BottomRight.position, TileSize);
     }
 
@@ -102,7 +102,7 @@ public class RoomManager : MonoBehaviour
             float difficultyScale = DifficultyCurve.Evaluate(timeScaled);
             float spawnInterval = MinSpawnInterval + (MaxSpawnInterval - MinSpawnInterval) * difficultyScale;
 
-            AudioManager.Instance.ChangePitchBendMusic(0.02f);
+            AudioManager.Instance?.ChangePitchBendMusic(0.02f);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
