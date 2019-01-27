@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public Text titleTrashcan;
     public Text titleWindow;
     public Text titleCloset;
+    public Text finalScore;
 
     public GameObject GameOverScreen;
 
@@ -60,8 +61,9 @@ public class UIManager : MonoBehaviour
         scoreSlider.value = value;
     }
 
-    public void ShowGameOverScreen()
+    public void ShowGameOverScreen(float score)
     {
+        finalScore.text = (score * 100).ToString("N0") + " / 100";
         GameOverScreen.SetActive(true);
     }
 

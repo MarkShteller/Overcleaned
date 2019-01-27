@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         if (gameTimer <= 0)
         {
             //stop game
-            UIManager.Instance.ShowGameOverScreen();
+            UIManager.Instance.ShowGameOverScreen(cleanliness);
             AudioManager.Instance.StopMainMusic();
             Time.timeScale = 0;
         }
