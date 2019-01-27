@@ -36,8 +36,7 @@ public class RoomManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        AudioManager.Instance?.PlayMainMusic();
+    {       
         _tiles = MapBuilder.BuildTileMap(TopLeft.position, BottomRight.position, TileSize);
     }
 
@@ -70,6 +69,8 @@ public class RoomManager : MonoBehaviour
     public void StartGame()
     {
         this._startTime = Time.time;
+        AudioManager.Instance?.PlayMainMusic();
+        MainMenu.Instance.StartGame();
         StartCoroutine(MessSpawner());
     }
 

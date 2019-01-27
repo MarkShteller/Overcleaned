@@ -3,17 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public Canvas mainMenuCanvas;
+    public Canvas uiCanvas;
+    public AudioSource menuMusic;
 
-    private void Update()
+    public static MainMenu Instance;
+
+    void Awake()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if(Instance == null)
         {
-            LoadScene();
+            Instance = this;
         }
     }
-    
-    public void LoadScene()
+
+
+    void Start()
     {
-        SceneManager.LoadScene("Main");
+        mainMenuCanvas.enabled = true;
+        uiCanvas.enabled = false;
+    }
+
+
+    public void StartGame()
+    {
+        mainMenuCanvas.enabled = false;
+        uiCanvas.enabled = true;
+        menuMusic.Stop();
+        menuMusic.enabled = false;
     }
 }
