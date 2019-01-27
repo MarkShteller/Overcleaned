@@ -16,6 +16,8 @@ public class RoomManager : MonoBehaviour
 
     public GameObject MudPrefab;
 
+    public PlayerManager playerManager;
+
     //Game Difficulty tuning
     public AnimationCurve DifficultyCurve;
     public float MaxSpawnInterval;
@@ -70,6 +72,7 @@ public class RoomManager : MonoBehaviour
     {
         this._startTime = Time.time;
         AudioManager.Instance?.PlayMainMusic();
+        GameManager.Instance.StartGame();
         MainMenu.Instance.StartGame();
         StartCoroutine(MessSpawner());
     }
@@ -105,7 +108,8 @@ public class RoomManager : MonoBehaviour
             float difficultyScale = DifficultyCurve.Evaluate(timeScaled);
             float spawnInterval = MinSpawnInterval + (MaxSpawnInterval - MinSpawnInterval) * difficultyScale;
 
-            AudioManager.Instance?.ChangePitchBendMusic(0.02f);
+            spawnInterval /= (float)(playerManager._currPlayerCount);
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }

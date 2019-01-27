@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,14 +55,24 @@ public class PlayerFocusDetector : MonoBehaviour
         IInteractable closest = null;
         foreach (IInteractable interactable in _set)
         {
-            if (interactable.CanInteract())
+            try
             {
-                float currDistance = (interactable.GetPosition() - playerPosition).magnitude;
-                if(currDistance < distance)
+                if(interactable != null)
                 {
-                    closest = interactable;
-                    distance = currDistance;
+                    if (interactable.CanInteract())
+                    {
+                        float currDistance = (interactable.GetPosition() - playerPosition).magnitude;
+                        if(currDistance < distance)
+                        {
+                            closest = interactable;
+                            distance = currDistance;
+                        }
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
 

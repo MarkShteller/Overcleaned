@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool isDishwasherFull;
     public bool isWasherFull;
 
+    private bool _gameStarted;
+
     public float cleanliness;
     public float gameTimer;
 
@@ -26,27 +28,38 @@ public class GameManager : MonoBehaviour
         DishWasherCapacity = 0;
         isDishwasherFull = false;
         isWasherFull = false;
+        _gameStarted = false;
     }
 
     private void Start()
     {
+        
+    }
+
+    public void StartGame()
+    {
         UIManager.Instance.SetGameTimer(gameTimer);
         UIManager.Instance.UpdateDishwasherSlider(DishWasherCapacity);
         UIManager.Instance.UpdateWasherSlider(WasherCapacity);
+        _gameStarted = true;
     }
 
     private void Update()
     {
-        gameTimer -= Time.deltaTime;
-
-        UIManager.Instance.UpdateScoreSlider(cleanliness);
-
-        if (gameTimer <= 0)
+        if(_gameStarted)
         {
-            //stop game
-            UIManager.Instance.ShowGameOverScreen(cleanliness);
-            AudioManager.Instance.StopMainMusic();
-            Time.timeScale = 0;
+            gameTimer -= Time.deltaTime;
+
+            UIManager.Instance.UpdateScoreSlider(cleanliness);
+
+            if (gameTimer <= 0)
+            {
+                //stop game
+                UIManager.Instance.ShowGameOverScreen(cleanliness);
+                AudioManager.Instance.StopMainMusic();
+                Time.timeScale = 0;
+            }
+
         }
     }
 
@@ -131,5 +144,6 @@ public class GameManager : MonoBehaviour
     public void ChangeCleanliness(float value)
     {
         cleanliness += value;
+        cleanliness = Math.Min(Math.Max(cleanliness, 0.0f), 100.0f);
     }
 }

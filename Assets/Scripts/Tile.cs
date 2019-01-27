@@ -42,6 +42,7 @@ public class Tile
     {
         GameManager.Instance.ChangeCleanliness(-cleanlinessValue);
         AudioManager.Instance.PlayMessFx(mess.Messtype);
+        AudioManager.Instance?.ChangePitchBendMusic(0.02f);
         MessReference = mess;
     }
 
@@ -49,6 +50,7 @@ public class Tile
     {
         MessReference = null;
         GameManager.Instance.ChangeCleanliness(cleanlinessValue);
+        AudioManager.Instance?.ChangePitchBendMusic(-0.01f);
     }
 
     public void AddTool(Tool t)

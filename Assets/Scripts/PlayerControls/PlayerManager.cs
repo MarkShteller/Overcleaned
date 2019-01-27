@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
         Color.yellow
     };
 
-    private int _currPlayerCount = 0;
+    public int _currPlayerCount = 0;
 
 	const int maxPlayers = 4;
 

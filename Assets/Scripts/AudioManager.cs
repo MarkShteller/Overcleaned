@@ -164,7 +164,9 @@ public class AudioManager : MonoBehaviour
 
     public void ChangePitchBendMusic(float PitchBendAmount)
     {
-        MainMusic.pitch += PitchBendAmount; 
+        float MAX_PITCH = 1.8f;
+        MainMusic.pitch += PitchBendAmount;
+        MainMusic.pitch = Math.Min(MainMusic.pitch, MAX_PITCH);
         MusicGroup.audioMixer.SetFloat("pitchBend", 1f / MainMusic.pitch);
     }
 }

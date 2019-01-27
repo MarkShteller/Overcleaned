@@ -48,4 +48,4 @@ MonoBehaviour:
   isDishwasherFull: 0
   isWasherFull: 0
   cleanliness: 0
-  gameTimer: 90
+  gameTimer: 120
