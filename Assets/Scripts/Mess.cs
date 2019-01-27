@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Mess: MonoBehaviour, IInteractible
+public class Mess: MonoBehaviour, IInteractable
 {
     public MessType Messtype { get; set; }
 
@@ -28,5 +28,15 @@ public class Mess: MonoBehaviour, IInteractible
     {
         this._currTile.MessReference = null;
         this._currTile = null;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    public void interact(Player player)
+    {
+
     }
 }

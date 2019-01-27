@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3000727293068605466}
   m_Layer: 0
   m_Name: TrashRoot
-  m_TagString: Untagged
+  m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

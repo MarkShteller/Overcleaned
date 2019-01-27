@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
 
     private Tile _currTile;
 
+    public PlayerFocusDetector FocusDetector;
+    public MeshRenderer FocusArrow;
+    private IInteractable _currFocusedInteractable;
+
 
 	void Start()
 	{
@@ -50,6 +54,8 @@ public class Player : MonoBehaviour
             this.UpdatePlayerTile();
         }
         anim.SetFloat("MoveSpeed", finalMoveSpeed/2.0f);
+
+        UpdateFocusedInteractable();
     }
 
 
@@ -65,6 +71,23 @@ public class Player : MonoBehaviour
         this._currTile = RoomManager.instance.GetTileAt(this.transform.position);
         this._currTile.PlayerReference = this;
 
+    }
+
+
+    void UpdateFocusedInteractable()
+    {
+        this._currFocusedInteractable = FocusDetector.GetClosestInteractable();
+        //Show focus arrow
+        if (this._currFocusedInteractable == null)
+        {
+            FocusArrow.enabled = false;
+        }
+        else
+        {
+            FocusArrow.enabled = true;
+
+            FocusArrow.transform.position = this._currFocusedInteractable.GetPosition() + Vector3.up * 2.0f;
+        }
     }
 
 
