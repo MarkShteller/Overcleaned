@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private Tile _currTile;
 
     public PlayerFocusDetector FocusDetector;
-    public MeshRenderer FocusArrow;
+    public FocusArrow focusArrow;
 
     private IInteractable _currFocusedInteractable;
     public IHoldable _currentHeld;
@@ -152,13 +152,14 @@ public class Player : MonoBehaviour
         //Show focus arrow
         if (this._currFocusedInteractable == null)
         {
-            FocusArrow.enabled = false;
+            focusArrow.Hide();
         }
         else
         {
-            FocusArrow.enabled = true;
+            focusArrow.Show();
 
-            FocusArrow.transform.position = this._currFocusedInteractable.GetPosition() + Vector3.up * 2.0f;
+            focusArrow.transform.position = this._currFocusedInteractable.GetPosition() + Vector3.up * 1.5f;
+            focusArrow.transform.rotation = Quaternion.identity;
         }
     }
 
