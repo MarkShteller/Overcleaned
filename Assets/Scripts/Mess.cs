@@ -75,6 +75,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         this._heldPlayer._currentHeld = null;
         this._heldPlayer = null;
         this.enabled = false;
+        AudioManager.Instance.PlayTrashFx();
         Destroy(this.gameObject);
     }
 
@@ -112,6 +113,8 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
         if( Messtype == MessType.Wet && cT == ToolType.Mop ||
             Messtype == MessType.Mud && cT == ToolType.Broom)
         {
+            
+            AudioManager.Instance.PlayToolCleanFx(cT);
             player.FocusDetector.RemoveObject(this);
             this.cleanUp();
             Destroy(this.gameObject);

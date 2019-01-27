@@ -44,15 +44,16 @@ public class GameManager : MonoBehaviour
         if (gameTimer <= 0)
         {
             //stop game
-            UIManager.Instance.ShowGameOverScreen();
+            UIManager.Instance.ShowGameOverScreen(cleanliness);
             AudioManager.Instance.StopMainMusic();
             Time.timeScale = 0;
         }
     }
 
-    public void AddDishwasherItem()
+    public void AddDishwasherItem(Animator animator)
     {
         print("adding to dishwasher curr cap: "+ DishWasherCapacity);
+        AudioManager.Instance.PlayDishWasherFx();
         if (!isDishwasherFull)
         {
             DishWasherCapacity++;
@@ -60,14 +61,15 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateDishwasherSlider(percent);
             if (percent == 1)
             {
-                StartCoroutine(WashDishes());
+                StartCoroutine(WashDishes(animator));
             }
         }
     }
 
-    public void AddWasherItem()
+    public void AddWasherItem(Animator animator)
     {
         print("adding to washer curr cap: " + WasherCapacity);
+        AudioManager.Instance.PlayWasherFx();
         if (!isWasherFull)
         {
             WasherCapacity++;
@@ -75,14 +77,16 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateWasherSlider(percent);
             if (percent == 1)
             {
-                StartCoroutine(WashClothes());
+                StartCoroutine(WashClothes(animator));
             }
         }
     }
 
-    private IEnumerator WashClothes()
+    private IEnumerator WashClothes(Animator animator)
     {
         isWasherFull = true;
+        animator.SetBool("Washing", isWasherFull);
+
         float maxTimer = 8;
         float washerCooldown = maxTimer;
         while (washerCooldown >= 0)
@@ -93,21 +97,26 @@ public class GameManager : MonoBehaviour
         }
         WasherCapacity = 0;
         isWasherFull = false;
+        animator.SetBool("Washing", isWasherFull);
     }
 
-    private IEnumerator WashDishes()
+    private IEnumerator WashDishes(Animator animator)
     {
         isDishwasherFull = true;
+        animator.SetBool("Washing", isDishwasherFull);
         float maxTimer = 8;
         float dishwasherCooldown = maxTimer;
+        
         while (dishwasherCooldown >= 0)
         {
             dishwasherCooldown -= Time.deltaTime;
             UIManager.Instance.UpdateDishwasherSlider(dishwasherCooldown / maxTimer);
             yield return null;
         }
+        
         DishWasherCapacity = 0;
         isDishwasherFull = false;
+        animator.SetBool("Washing", isDishwasherFull);
     }
 
     public void ChangeCleanliness(float value)
