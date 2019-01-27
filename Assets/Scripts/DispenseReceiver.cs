@@ -28,7 +28,7 @@ public class DispenseReceiver : MonoBehaviour, IInteractable
                 //Check if the receiver is compatible with object held by the plaer
                 if (this.type == DispenseReceiverType.TrashCan)
                 {
-                    if(mess.Messtype == MessType.Trash)
+                    if(mess.Messtype == MessType.Trash || mess.Messtype == MessType.Poop)
                     {
                         mess.OnDispense();
                     }
