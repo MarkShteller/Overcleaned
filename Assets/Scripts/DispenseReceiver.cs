@@ -8,6 +8,7 @@ public enum DispenseReceiverType
     TrashCan,
     Window,
     Dishwasher,
+    Washer,
     Closet
 }
 
@@ -38,6 +39,16 @@ public class DispenseReceiver : MonoBehaviour, IInteractable
                     if (mess.Messtype == MessType.Dishes)
                     {
                         mess.OnDispense();
+                        GameManager.Instance.AddDishwasherItem();
+                    }
+                }
+
+                if (this.type == DispenseReceiverType.Washer)
+                {
+                    if (mess.Messtype == MessType.Clothes)
+                    {
+                        mess.OnDispense();
+                        GameManager.Instance.AddWasherItem();
                     }
                 }
             }
@@ -51,6 +62,16 @@ public class DispenseReceiver : MonoBehaviour, IInteractable
 
     public bool CanInteract()
     {
+        if (type == DispenseReceiverType.Dishwasher)
+        {
+            if (GameManager.Instance.isDishwasherFull)
+                return false;
+        }
+        if (type == DispenseReceiverType.Washer)
+        {
+            if (GameManager.Instance.isWasherFull)
+                return false;
+        }
         return true;
     }
 }
