@@ -16,11 +16,12 @@ public enum DispenseReceiverType
 public class DispenseReceiver : MonoBehaviour, IInteractable
 {
     public DispenseReceiverType type;
-    private Animator animator;
+    public Animator animator;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        if(animator == null)
+            animator = GetComponent<Animator>();
     }
 
     public void interact(Player player)
@@ -64,6 +65,8 @@ public class DispenseReceiver : MonoBehaviour, IInteractable
                 {
                     if (mess.Messtype == MessType.Clothes || mess.Messtype == MessType.Trash)
                     {
+                        animator.SetTrigger("Open");
+
                         mess.OnDispense();
                     }
                 }
