@@ -21,9 +21,9 @@ public class RoomManager : MonoBehaviour
     public float MinutesToMinInterval;
     public float HardThreshold;
 
+    public delegate void OnInteractWithTile(AudioClip clip);
+    public OnInteractWithTile onInteractWithTile;
     
-    private Vector3 XBasis = new Vector3(1,0,0);
-    private Vector3 YBasis = new Vector3(0,0,-1);
     private Tile[,] _tiles;
 
     //Game state variables
@@ -34,6 +34,7 @@ public class RoomManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }
+        AudioManager.Instance.PlayMainMusic();
     }
 
     private void Start()
@@ -49,8 +50,8 @@ public class RoomManager : MonoBehaviour
             {
                 Tile t = _tiles[i, j];
 
-                Debug.DrawLine(t.TopLeft, t.TopLeft + (XBasis * TileSize), Color.red);
-                Debug.DrawLine(t.TopLeft, t.TopLeft + (YBasis * TileSize), Color.red);
+                /*Debug.DrawLine(t.TopLeft, t.TopLeft + (XBasis * TileSize), Color.red);
+                Debug.DrawLine(t.TopLeft, t.TopLeft + (YBasis * TileSize), Color.red);#1#
 
                 if (t.HasPlayer)
                 {
@@ -104,8 +105,7 @@ public class RoomManager : MonoBehaviour
             float difficultyScale = DifficultyCurve.Evaluate(timeScaled);
             float spawnInterval = MinSpawnInterval + (MaxSpawnInterval - MinSpawnInterval) * difficultyScale;
 
-            //Debug.Log("Spawn Interval:"+ spawnInterval);
- 
+            AudioManager.Instance.ChangePitchBendMusic(0.02f);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
