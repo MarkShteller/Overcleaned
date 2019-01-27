@@ -359,7 +359,7 @@ MonoBehaviour:
   logDebugInfo: 1
   invertYAxis: 0
   useFixedUpdate: 0
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   suspendInBackground: 0
   enableICade: 0
   enableXInput: 0
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 947254393025586683, guid: a0dfbc3a7bdd86c4f94ff0e10e5acea6,
     type: 3}
+  _currPlayerCount: 0
   playerPositions:
   - {fileID: 385642458193745755}
   - {fileID: 385642457342420459}

@@ -72,7 +72,6 @@ public class PlayerFocusDetector : MonoBehaviour
             }
             catch (Exception e)
             {
-                return null;
             }
         }
 

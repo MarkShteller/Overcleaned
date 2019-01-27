@@ -139,6 +139,7 @@ MonoBehaviour:
   - {fileID: 1896793676681004682, guid: f276f0efb7b1b704fb56f66bdeda18e5, type: 3}
   MudPrefab: {fileID: 6404739498666469353, guid: 482a62ce293adf0429bb7fd6e06a030c,
     type: 3}
+  playerManager: {fileID: 0}
   DifficultyCurve:
     serializedVersion: 2
     m_Curve:
@@ -152,8 +153,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.07129739
     - serializedVersion: 3
-      time: 0.6171398
-      value: 0.6760948
+      time: 0.45665237
+      value: 0.77483535
       inSlope: -1.2000291
       outSlope: -1.2000291
       tangentMode: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
       outWeight: 0.1556636
     - serializedVersion: 3
       time: 0.9956665
-      value: -0.00390625
+      value: 0.05126953
       inSlope: -0.037082806
       outSlope: -0.037082806
       tangentMode: 0
@@ -173,8 +174,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxSpawnInterval: 5
-  MinSpawnInterval: 1
-  MinutesToMinInterval: 1
+  MinSpawnInterval: 2
+  MinutesToMinInterval: 1.5
   HardThreshold: 0.2
 --- !u!1 &8257485470839443648
 GameObject:

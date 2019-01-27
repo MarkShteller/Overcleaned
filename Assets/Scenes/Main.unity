@@ -2077,7 +2077,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 385642458593733157, guid: e7cc93355d76dc84aa768ec4072c88fc,
         type: 3}
-      propertyPath: dontDestroyOnLoad
+      propertyPath: useFixedUpdate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 385642458593733157, guid: e7cc93355d76dc84aa768ec4072c88fc,
+        type: 3}
+      propertyPath: enableNativeInput
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2484,24 +2489,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
         type: 3}
-      propertyPath: MaxSpawnInterval
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
-        type: 3}
-      propertyPath: MinSpawnInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
-        type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 175049775}
-    - target: {fileID: 8257485470652833677, guid: c3a88608c15444e4c9b974882b478bcd,
-        type: 3}
-      propertyPath: MinutesToMinInterval
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a88608c15444e4c9b974882b478bcd, type: 3}
 --- !u!1001 &5950863160502531
