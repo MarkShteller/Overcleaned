@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
         if (gameTimer <= 0)
         {
             //stop game
+            UIManager.Instance.ShowGameOverScreen();
+            Time.timeScale = 0;
         }
     }
 

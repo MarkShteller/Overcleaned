@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     public Text titleTrashcan;
     public Text titleWindow;
     public Text titleCloset;
+
+    public GameObject GameOverScreen;
 
     private float gameTimer;
 
@@ -43,6 +46,17 @@ public class UIManager : MonoBehaviour
     public void UpdateScoreSlider(float value)
     {
         scoreSlider.value = value;
+    }
+
+    public void ShowGameOverScreen()
+    {
+        GameOverScreen.SetActive(true);
+    }
+
+    public void PlayAgainAction()
+    {
+        //reload the scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ToggleTitleDishwasher()
