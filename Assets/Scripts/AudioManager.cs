@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEditor.iOS;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
