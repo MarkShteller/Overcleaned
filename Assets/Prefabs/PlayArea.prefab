@@ -130,9 +130,11 @@ MonoBehaviour:
   TopLeft: {fileID: 8257485470615712029}
   BottomRight: {fileID: 8257485471199950073}
   EasyMessPrefabs:
-  - {fileID: 3014566238391679181, guid: 89f70f095e5540a40a6c2395b8130a37, type: 3}
+  - {fileID: 6493190186028272221, guid: 65c1d1094059d5045ad4fb38024f9d75, type: 3}
+  - {fileID: 6404739498666469353, guid: 482a62ce293adf0429bb7fd6e06a030c, type: 3}
+  - {fileID: 4468023144257878407, guid: 326377deb4f3a314ea5f07e6186294ad, type: 3}
   HardMessPrefabs:
-  - {fileID: 3014566238391679181, guid: d405d15d4b1adbf429fabc27af54b34e, type: 3}
+  - {fileID: 1896793676681004682, guid: f276f0efb7b1b704fb56f66bdeda18e5, type: 3}
   DifficultyCurve:
     serializedVersion: 2
     m_Curve:

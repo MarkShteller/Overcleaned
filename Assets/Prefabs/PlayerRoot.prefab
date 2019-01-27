@@ -48,7 +48,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.16
   m_Radius: 0.26
-  m_SlopeLimit: 45
+  m_SlopeLimit: 3
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -67,7 +67,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &947254393025586687
 MonoBehaviour:
