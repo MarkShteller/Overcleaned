@@ -9,13 +9,6 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
 
     private Player _heldPlayer;
 
-    private Collider collider;
-
-    void Start()
-    {
-        collider = GetComponent<Collider>();
-    }
-
 
     public void dropOn(Tile tile)
     {
@@ -26,7 +19,6 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
     public void OnPickUp(Player player)
     {
         this._heldPlayer = player;
-        collider.enabled = false;
         this.cleanUp();
         //Attach to players handpoint
 
@@ -47,9 +39,7 @@ public class Mess: MonoBehaviour, IInteractable, IHoldable
                 this._heldPlayer = null;
                 return true;
             }
-
-            //Check if near trashcan
-
+            
             return true;
         }
 
